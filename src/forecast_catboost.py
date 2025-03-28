@@ -43,8 +43,16 @@ features = ['hr', 'day', 'mnth', 'yr', 'weekday', 'holiday', 'season'] + [f'{fea
 X = hourly_df[features]
 y = hourly_df['cnt']
 
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Time-based split
+train_size = int(len(X) * 0.8)  # Use 80% of the data for training
+X_train, X_test = X.iloc[:train_size], X.iloc[train_size:]
+y_train, y_test = y.iloc[:train_size], y.iloc[train_size:]
+
+# Ensure indices are aligned after splitting
+X_train = X_train.reset_index(drop=True)
+X_test = X_test.reset_index(drop=True)
+y_train = y_train.reset_index(drop=True)
+y_test = y_test.reset_index(drop=True)
 
 # Initialize and train the CatBoost model
 model = CatBoostRegressor(iterations=500, learning_rate=0.1, depth=6, random_seed=42, verbose=0)

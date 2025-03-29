@@ -1,6 +1,6 @@
 """
-This script loads the hourly Bike Sharing dataset and trains an XGBoost model to predict the number
-of bike rentals (cnt).
+This file contains all methods to train an XGBoost model with the Bike Sharing dataset to predict
+the number of bike rentals (cnt).
 The methods for loading, preprocessing and splitting the data have been encapsulated in functions.
 The sames has been done for the methods for model training, evaluation and visualizing the
 predictions.
@@ -118,9 +118,10 @@ def train_xgboost_model(X_train: pd.DataFrame, y_train: pd.Series) -> XGBRegress
 
 def evaluate_model(
     model: XGBRegressor, X_test: pd.DataFrame, y_test: pd.Series
-) -> tuple[float, float, float]:
+) -> tuple[float, float, float, float]:
     """
     Evaluate the trained model on the testing data.
+    This is done by calculating the RMSE, MAE, R-squared and Mean Absolute Deviation (MAD).
 
     Args:
         model (XGBRegressor): The trained XGBoost model.
@@ -128,17 +129,18 @@ def evaluate_model(
         y_test (pd.Series): The testing target Series.
 
     Returns:
-        tuple[float, float, float]: A tuple containing the RMSE, MAE, and R-squared values.
+        tuple[float, float, float]: A tuple containing the RMSE, MAE, R-squared and MAD values.
     """
     y_pred = model.predict(X_test)
     rmse = np.sqrt(mean_squared_error(y_test, y_pred))
     mae = mean_absolute_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
+    mad = np.mean(np.abs(y_test - y_pred))  # Calculate Mean Absolute Deviation
 
-    return rmse, mae, r2
+    return rmse, mae, r2, mad
 
 
-def visualize_prediction(
+def visualize_prediction_vs_actual(
     model: XGBRegressor, X_test: pd.DataFrame, y_test: pd.Series, pred_length: int = 72
 ) -> None:
     """
@@ -178,30 +180,3 @@ def visualize_prediction(
         plt.show()
     else:  # If we have not enough data, print a warning.
         print("Not enough data in X_test for future predictions.")
-
-
-if __name__ == "__main__":
-    file_path = "data/hour.csv"  # Path to the dataset
-    pred_hours = 72  # Number of hours to predict. Is also used for lagging the features.
-
-    print("Loading data...")
-    data = load_data(file_path)
-
-    print("Preprocessing data...")
-    X, y = preprocess_data(data, lag_hours=pred_hours)
-
-    print("Splitting data into train and test sets...")
-    X_train, X_test, y_train, y_test = split_data(X, y, train_size=0.8)
-
-    print("Training XGBoost model...")
-    model = train_xgboost_model(X_train, y_train)
-
-    print("Evaluating model:")
-    rmse, mae, r2 = evaluate_model(model, X_test, y_test)
-    print(f"Root Mean Squared Error (RMSE): {rmse}")
-    print(f"Mean Absolute Error (MAE): {mae}")
-    print(f"R-squared: {r2}")
-
-    print(f"Visualizing predictions for the next {pred_hours} hours...")
-    visualize_prediction(model, X_test, y_test, pred_length=pred_hours)
-    print("Done.")

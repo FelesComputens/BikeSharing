@@ -66,6 +66,7 @@ rmse = np.sqrt(mean_squared_error(y_test, y_pred))
 print(f"Root Mean Squared Error (RMSE): {rmse}")
 print(f"Mean Absolute Error (MAE): {mean_absolute_error(y_test, y_pred)}")
 print(f"R-squared: {r2_score(y_test, y_pred)}")
+print(f"Mean Absolute Deviation (MAD): {np.mean(np.abs(y_test - y_pred))}")
 
 # Predict future values (example: next 72 hours)
 if len(X_test) >= 72:

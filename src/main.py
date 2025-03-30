@@ -32,7 +32,7 @@ def main():
     print(f"Mean Absolute Deviation (MAD): {mad}")
 
     # The model now has been created. The following code is only needed for evaluating it.
-    print(f"Visualizing predictions for the next {pred_hours} hours...")
+    print(f"Visualizing predictions for the first {pred_hours} of the test set...")
     visualize_prediction_vs_actual(model, X_test, y_test, pred_length=pred_hours)
     print("Done.")
 

@@ -1,6 +1,7 @@
 # Bike Sharing XGBoost Forecasting
 
-This project aims to predict the number of bike rentals using an XGBoost model. It utilizes historical bike sharing data to train the model and evaluate its performance.
+This project aims to predict the number of bike rentals using an XGBoost model. It utilizes 
+historical bike sharing data to train the model and evaluate its performance.
 
 ## Project Structure
 
@@ -20,9 +21,8 @@ BikeSharing
 
 ## Setup
 
-1. Clone the repository:
+1. unpack the .zip archive
    ```
-   git clone <repository-url>
    cd BikeSharing
    ```
 
@@ -40,7 +40,8 @@ To run the project, execute the following command:
 python src/main.py
 ```
 
-This will load the data, preprocess it, train the XGBoost model, evaluate its performance, and visualize the predictions for the next 72 hours. You can use main.py as orientation on how to use
+This will load the data, preprocess it, train the XGBoost model, evaluate its performance, and 
+visualize the predictions for the next 72 hours. You can use main.py as orientation on how to use 
 the methods.
 
 ## Dependencies

@@ -62,7 +62,7 @@ def preprocess_data(df: pd.DataFrame, lag_hours: int = 72) -> tuple[pd.DataFrame
     # Define features and target variable
     # Features are: hr, day, mnth, yr, weekday, holiday, season, and the lagged features.
     # Target feature is cnt, the number of bike rentals.
-    features = ["hr", "day", "mnth", "yr", "weekday", "holiday", "season"] + [
+    features = ["hr", "day", "mnth", "yr", "weekday", "workingday", "holiday", "season"] + [
         f"{feature}_lag{lag_hours}" for feature in lag_features
     ]
     X = hourly_df[features]

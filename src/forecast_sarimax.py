@@ -27,7 +27,7 @@ for feature in lag_features:
 hourly_df = hourly_df.dropna()
 
 # Define features and target variable
-features = ['hr', 'day', 'mnth', 'yr', 'weekday', 'holiday', 'season'] + [f'{feature}_lag{lag_hours}' for feature in lag_features]
+features = ['hr', 'day', 'mnth', 'yr', 'weekday', 'workingday', 'holiday', 'season'] + [f'{feature}_lag{lag_hours}' for feature in lag_features]
 X = hourly_df[features]
 y = hourly_df['cnt']
 

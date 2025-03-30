@@ -34,12 +34,12 @@ hourly_df[f'weathersit_lag{lag_hours}'] = hourly_df[f'weathersit_lag{lag_hours}'
 
 # Define categorical features
 # categorical_features = ['holiday', 'season', 'weekday', f'weathersit_lag{lag_hours}']
-categorical_features = ['holiday', 'season', 'weekday', f'weathersit_lag{lag_hours}']
+categorical_features = ['weekday', "workingday", 'holiday', 'season', f'weathersit_lag{lag_hours}']
 
 # Define features and target variable
 # Features are: hr, day, mnth, yr, weekday, holiday, 'season', and the lagged features.
 # Target feature is cnt, the number of bike rentals.
-features = ['hr', 'day', 'mnth', 'yr', 'weekday', 'holiday', 'season'] + [f'{feature}_lag{lag_hours}' for feature in lag_features]
+features = ['hr', 'day', 'mnth', 'yr', 'weekday', "workingday", 'holiday', 'season'] + [f'{feature}_lag{lag_hours}' for feature in lag_features]
 X = hourly_df[features]
 y = hourly_df['cnt']
 
@@ -72,7 +72,7 @@ print(f"Mean Absolute Deviation (MAD): {np.mean(np.abs(y_test - y_pred))}")
 if len(X_test) >= 72:
     future_data = X_test.iloc[:72]
     future_predictions = model.predict(future_data)
-    print(f"Future Predictions: {future_predictions}")
+    # print(f"Future Predictions: {future_predictions}")
 
     # Plot the future predictions vs actual values
     plt.figure(figsize=(12, 6))

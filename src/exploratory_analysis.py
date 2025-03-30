@@ -84,17 +84,13 @@ plt.show()
 
 
 # Plot daily bike rentals for May 2012
-august_df = daily_df[
-    (daily_df["dteday"] >= "2012-05-01") & (daily_df["dteday"] <= "2012-05-31")
-]
+may_df = daily_df[(daily_df["dteday"] >= "2012-05-01") & (daily_df["dteday"] <= "2012-05-31")]
 plt.figure(figsize=(15, 6))
-plt.plot(
-    august_df["dteday"], august_df["cnt"], label="# Bike Rentals", color="green"
-)
+plt.plot(may_df["dteday"], may_df["cnt"], label="# Bike Rentals", color="green")
 
 # Add weather situation as annotations
 weather_labels = {1: "Clear", 2: "Mist", 3: "Light Snow/Rain", 4: "Heavy Snow/Rain"}
-for i, row in august_df.iterrows():
+for i, row in may_df.iterrows():
     plt.text(
         row["dteday"],
         row["cnt"] + 50,  # Offset for better visibility
@@ -112,16 +108,12 @@ plt.show()
 
 
 # Plot daily bike rentals for August 2012
-september_df = daily_df[
-    (daily_df["dteday"] >= "2012-08-01") & (daily_df["dteday"] <= "2012-08-31")
-]
+august_df = daily_df[(daily_df["dteday"] >= "2012-08-01") & (daily_df["dteday"] <= "2012-08-31")]
 plt.figure(figsize=(15, 6))
-plt.plot(
-    september_df["dteday"], september_df["cnt"], label="# Bike Rentals", color="green"
-)
+plt.plot(august_df["dteday"], august_df["cnt"], label="# Bike Rentals", color="green")
 # Add weather situation as annotations
 weather_labels = {1: "Clear", 2: "Mist", 3: "Light Snow/Rain", 4: "Heavy Snow/Rain"}
-for i, row in september_df.iterrows():
+for i, row in august_df.iterrows():
     plt.text(
         row["dteday"],
         row["cnt"] + 50,  # Offset for better visibility

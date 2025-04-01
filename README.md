@@ -21,8 +21,9 @@ BikeSharing
 
 ## Setup
 
-1. unpack the .zip archive
+1. Clone the repository:
    ```
+   git clone <repository-url>
    cd BikeSharing
    ```
 
